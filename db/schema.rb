@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_042754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", force: :cascade do |t|
+  create_table "customers", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "registered_at"
     t.string "address"
@@ -28,7 +28,8 @@ ActiveRecord::Schema.define(version: 2018_06_18_042754) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "movies", force: :cascade do |t|
+
+  create_table "movies", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "overview"
     t.date "release_date"
@@ -39,7 +40,8 @@ ActiveRecord::Schema.define(version: 2018_06_18_042754) do
     t.integer "external_id"
   end
 
-  create_table "rentals", force: :cascade do |t|
+
+  create_table "rentals", id: :serial, force: :cascade do |t|
     t.integer "customer_id"
     t.integer "movie_id"
     t.date "checkout_date"

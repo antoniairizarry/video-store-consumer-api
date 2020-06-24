@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
   before_action :require_movie, only: [:show]
 
+  # GET /movies
+  # GET /movies?query=something
   def index
     if params[:query]
       data = MovieWrapper.search(params[:query])
