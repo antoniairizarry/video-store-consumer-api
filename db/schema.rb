@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_042754) do
     t.datetime "updated_at", null: false
   end
 
+
   create_table "movies", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "overview"
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_042754) do
     t.string "image_url"
     t.integer "external_id"
   end
+
 
   create_table "rentals", id: :serial, force: :cascade do |t|
     t.integer "customer_id"
