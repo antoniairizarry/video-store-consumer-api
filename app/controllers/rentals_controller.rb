@@ -16,13 +16,14 @@ class RentalsController < ApplicationController
     checkedout = []
     checkedout = rentals.map do |rental|
       {
-          title: rental.movie.title,
-          # customer_id: rental.customer_id,
-          name: rental.customer.name,
-          # postal_code: rental.customer.postal_code,
-          checkout_date: rental.checkout_date,
-          due_date: rental.due_date,
-          returned: rental.returned
+        id: rental.id,  
+        customer_id: rental.customer.id,
+        title: rental.movie.title,
+        name: rental.customer.name,
+        # postal_code: rental.customer.postal_code,
+        checkout_date: rental.checkout_date,
+        due_date: rental.due_date,
+        returned: rental.returned
       }
     end
 
@@ -86,6 +87,8 @@ private
 
   def require_customer
     @customer = Customer.find_by id: params[:customer_id]
+    puts "here #{@customer}"
+    puts "#{params}"
     unless @customer
       render status: :not_found, json: { errors: { customer_id: ["No such customer #{params[:customer_id]}"] } }
     end
