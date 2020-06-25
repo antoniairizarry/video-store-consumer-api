@@ -12,3 +12,9 @@ JSON.parse(File.read('db/seeds/movies.json')).each do |movie_data|
   movies.first.inventory = movie_data['inventory']
   movies.first.save unless movies.empty?
 end
+
+rental_data = JSON.parse(File.read('db/seeds/rentals.json'))
+
+rental_data.each do |rental|
+  Rental.create!(rental)
+end
