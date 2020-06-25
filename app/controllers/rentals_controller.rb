@@ -2,6 +2,37 @@ class RentalsController < ApplicationController
   before_action :require_movie, only: [:check_out, :check_in]
   before_action :require_customer, only: [:check_out, :check_in]
 
+  # GET /rentals
+  def index
+    data = Rental.all
+    render status: :ok, json: data
+  end
+
+  #custom method
+  #GET /rentals/currentlycheckedout
+  #I know this is long. Too Bad!
+  def currentlycheckedout
+    rentals = Rental.where(returned: false)
+    checkedout = []
+    checkedout = rentals.map do |rental|
+      {
+          title: rental.movie.title,
+          # customer_id: rental.customer_id,
+          name: rental.customer.name,
+          # postal_code: rental.customer.postal_code,
+          checkout_date: rental.checkout_date,
+          due_date: rental.due_date,
+          returned: rental.returned
+      }
+    end
+
+    render status: :ok, json: checkedout
+  end
+
+
+
+
+  #*******************************************************
   # TODO: make sure that wave 2 works all the way
   def check_out
     rental = Rental.new(movie: @movie, customer: @customer, due_date: params[:due_date])

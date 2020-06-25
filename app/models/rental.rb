@@ -4,7 +4,7 @@ class Rental < ApplicationRecord
 
   # validates :movie, uniqueness: { scope: :customer }
   validates :due_date, presence: true
-  validate :due_date_in_future, on: :create
+  # validate :due_date_in_future, on: :create
 
   after_initialize :set_checkout_date
   after_initialize :set_returned
