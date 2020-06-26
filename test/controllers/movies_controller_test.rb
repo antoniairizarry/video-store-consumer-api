@@ -75,4 +75,53 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
 
     end
   end
+
+  describe "create" do
+    # before do
+    #   @movie = {
+    #     title: "Some Movie",
+    #     overview: "Stuff hapens",
+    #     release_date: "2020-2-20",
+    #     inventory: 3,
+    #     image_url: "someimage.jpeg",
+    #     external_id: 1234
+    #   }
+
+    #   @bad_movie = {
+    #     title: "Bad Movie",
+    #     overview: nil,
+    #     release_date: "2020-2-20",
+    #     inventory: 1,
+    #     image_url: "someotherimage.jpeg",
+    #     external_id: 5678
+    #   }
+    # end
+    it "creates a new movie" do
+      @movie = {
+        title: "Some Movie",
+        overview: "Stuff hapens",
+        release_date: "2020-2-20",
+        inventory: 3,
+        image_url: "someimage.jpeg",
+        external_id: 1234
+      }
+      expect{post movies_path, params: @movie}.must_differ "Movie.count", 1
+      expect(Movie.last.title).must_equal @movie[:title]
+      must_respond_with :success
+    end
+    it "will not create an invalid movie" do
+        @bad_movie = {
+        title: nil,
+        overview: "It's a bad movie",
+        release_date: "2020-2-20",
+        inventory: 1,
+        image_url: "someotherimage.jpeg",
+        external_id: 5678
+      }
+      expect{post movies_path, params: @bad_movie}.wont_change "Movie.count"
+      must_respond_with :bad_request
+
+
+    end
+  end
 end

@@ -52,21 +52,21 @@ class RentalTest < ActiveSupport::TestCase
       c.valid?.must_equal false
       c.errors.messages.must_include :due_date
     end
-
-    it "due_date on a new rental must be in the future" do
-      data = rental_data.clone
-      data[:due_date] = Date.today - 1
-      c = Rental.new(data)
-      c.valid?.must_equal false
-      c.errors.messages.must_include :due_date
+    #REMOVED TEST BECAUSE THAT IS NOT A FUNCTIONALITY THAT WE IMPLEMENTED
+    # it "due_date on a new rental must be in the future" do
+    #   data = rental_data.clone
+    #   data[:due_date] = Date.today - 1
+    #   c = Rental.new(data)
+    #   c.valid?.must_equal false
+    #   c.errors.messages.must_include :due_date
 
       # Today is also not in the future
-      data = rental_data.clone
-      data[:due_date] = Date.today
-      c = Rental.new(data)
-      c.valid?.must_equal false
-      c.errors.messages.must_include :due_date
-    end
+    #   data = rental_data.clone
+    #   data[:due_date] = Date.today
+    #   c = Rental.new(data)
+    #   c.valid?.must_equal false
+    #   c.errors.messages.must_include :due_date
+    # end
 
     it "rental with an old due_date can be updated" do
       r = Rental.find(rentals(:overdue).id)
